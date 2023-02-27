@@ -3,7 +3,6 @@ from pathlib import Path
 
 files = os.listdir('data/')
 output_folder = "output/"
-output_file = ""
 master_json={}
 
 for f in files:
@@ -18,15 +17,8 @@ for f in files:
         file_name = Path("data/{}".format(f)).stem        
         master_json[file_name] = hl7_row
 
-# result = [json.dumps(record) for record in master_json]
-# print(len(master_json))
-# master_ndjson = '\n'.join(result)
-# with open("output.ndjson", 'w+') as f:
-#     f.write(master_ndjson)
-#     f.close()
-
 for key, value in master_json.items():
-    # print("key:", value)
-    with open("output/{}.json".format(key), 'w+') as f:        
+    file_name = output_folder +key +".json"
+    with open(file_name, 'w+') as f:        
         f.write(json.dumps(value))
         f.close()
